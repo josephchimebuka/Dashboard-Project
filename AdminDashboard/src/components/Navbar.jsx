@@ -8,16 +8,8 @@ import { TooltipComponent } from "@syncfusion/ej2-react-popups"
 import { usestateContext } from "../context/ContextProvider"
 import avatar from '../data/avatar.jpg'
 
-interface NavButtonProps{
-  title: string
-  color: string,
-  dotColor: string,
-  icon: ReactElement
-  customFunc: ()=>void,
-}
 
-
-const NavButton =({title, icon, customFunc, color, dotColor}:NavButtonProps)=>(
+const NavButton =({title, icon, customFunc, color, dotColor})=>(
   <TooltipComponent content={title} position="BottomCenter">
     <button type="button" style={{color}} className="relative text-xl rounded-full hover:bg-light-gray" onClick={customFunc}>
       <span style={{background: dotColor}} className="absolute inline-flex rounded-full h-2 w-2 -right-1 top-0"/>
