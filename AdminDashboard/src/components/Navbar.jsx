@@ -7,6 +7,10 @@ import { MdKeyboardArrowDown } from "react-icons/md"
 import { TooltipComponent } from "@syncfusion/ej2-react-popups"
 import { usestateContext } from "../context/ContextProvider"
 import avatar from '../data/avatar.jpg'
+import Cart from "./Cart"
+import Notification from "./Notification"
+import UserProfile from "./UserProfile"
+import ChartsHeading from "./Charts/ChartsHeading"
 
 
 const NavButton =({title, icon, customFunc, color, dotColor})=>(
@@ -19,19 +23,35 @@ const NavButton =({title, icon, customFunc, color, dotColor})=>(
   </TooltipComponent>
 )
 const Navbar = () => {
-  const {setActiveMenu} = usestateContext()
+  const {setActiveMenu,handleClick,IsClicked, setIsclicked,screenSize, setscreenSize} = usestateContext()
 
-  const handleToggleMenu = () => {
-    setActiveMenu(); 
-  };
+  useEffect(()=>{
+      const handleResize =()=> setscreenSize(window.innerWidth);
+
+      window.addEventListener('resize', handleResize)
+
+      handleResize()
+
+      window,removeEventListener('resize', handleResize)
+  },[])
+
+
+  useEffect(()=>{
+    if(screenSize<= 900){
+      setActiveMenu(false)
+    }else{
+      setActiveMenu(true)
+    }
+  }, [screenSize])
   return (
-    <div className="flex items-center justify-between md:mx-6">
+    <div className="flex items-center justify-between mx-2 md:mx-6 navbar">
       <NavButton
        title={"Menu"}
         color={"blue"}
          dotColor={""}
+         customFunc={()=>setActiveMenu((prev)=>(!prev))}
+
           icon={<AiOutlineMenu/>}
-           customFunc={handleToggleMenu}
            />
       <div className="flex items-center gap-5">
       <NavButton
@@ -39,29 +59,29 @@ const Navbar = () => {
         color={"blue"}
          dotColor={""}
           icon={<FiShoppingCart/>}
-           customFunc={handleToggleMenu}
+          customFunc={()=> handleClick('cart')}
            />
 
     <NavButton
-       title={"Cart"}
+       title={"Chat"}
         color={"blue"}
          dotColor={"#03C9D7"}
           icon={<BsChatLeft/>}
-           customFunc={handleToggleMenu}
+          customFunc={()=> handleClick('chat')}
            />
 
 
     <NavButton
-       title={"Cart"}
+       title={"Notification"}
         color={"blue"}
           dotColor={"#03C9D7"}
           icon={<RiNotification3Fill/>}
-           customFunc={handleToggleMenu}
+          customFunc={()=> handleClick('notification')}
            />
 
 
           <TooltipComponent content='Profile' position="BottomCenter">
-          <div className="flex items-center cursor-pointer p-3 hover:bg:light-gray rounded-lg" onClick={handleToggleMenu}>
+          <div className="flex items-center cursor-pointer p-3 hover:bg:light-gray rounded-lg"   customFunc={()=> handleClick('chat')}>
               <img src={avatar} className="rounded-full w-8 h-8"/>
               <p>
                 <span className="text-gray-400 text-14">Hi,</span> {'  '}
@@ -70,7 +90,10 @@ const Navbar = () => {
               <MdKeyboardArrowDown className="text-gray-400 ml-1 text-14"/>
            </div>
           </TooltipComponent>
-         
+         {IsClicked.cart && <Cart/>}
+         {IsClicked.chat && <ChartsHeading/>}
+         {IsClicked.notification && <Notification/>}
+         {IsClicked.userprofile && <UserProfile/>}
       </div>
     </div>
   )

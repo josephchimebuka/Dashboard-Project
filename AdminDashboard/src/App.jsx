@@ -7,7 +7,7 @@ import Ecommerce from './pages/Ecommerce';
 import { usestateContext } from './context/ContextProvider'
 function App() {
   const position = 'top'
-  const activeMenu = true
+  const {activeMenu} = usestateContext()
   return (
     <>
       <div>
@@ -29,7 +29,7 @@ function App() {
           </div>
         ):(
           <div className='dark:bg-main-dark-bg '>
-                  <div>No side bar</div>
+                  <div></div>
           </div>
         )
       }
@@ -38,7 +38,7 @@ function App() {
           <div className='fixed md:static bg-main-bg w-full navbar'>
            <Navbar/>
           </div>
-      </div>
+
 
       <Routes>
         <Route path='/' element={<Ecommerce/>}/>
@@ -65,6 +65,7 @@ function App() {
         <Route path='/color-mapping' element={<Ecommerce/>}/>
         <Route path='/stacked' element={<Ecommerce/>}/>
       </Routes>
+      </div>
       </div>
       </BrowserRouter>
      </div>

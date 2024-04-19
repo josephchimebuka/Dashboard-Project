@@ -5,7 +5,12 @@ import {TooltipComponent} from '@syncfusion/ej2-react-popups'
 import {links} from '../data/dummy'
 import { usestateContext } from "../context/ContextProvider"
 const Sidebar = () => {
-  const {activeMenu} = usestateContext()
+  const {activeMenu, setActiveMenu, screenSize} = usestateContext()
+  const handleCloseSidebar=()=>{
+    if(activeMenu && screenSize <= 900) {
+      setActiveMenu(false)
+    }
+  }
  
   const activeLink = 'flex items-center gap-5 pl-4 pt-3 pb-2.5 rounded-lg text-white text-md m-2'
   const normalLink = 'flex items-center gap-5 pl-4 pt-3 pb-2.5 rounded-lg text-gray-700 dark:text-gray-200 dark:hover:text-black hover:bg-light-gray  text-md m-2'
@@ -20,7 +25,7 @@ const Sidebar = () => {
                 </Link>
                 <TooltipComponent content='menu'>
                     <button 
-                     className="p-3 text-xl rounded-full hover:bg-light-gray md:hidden">
+                     className="p-3 text-xl rounded-full hover:bg-light-gray md:hidden" onClick={handleCloseSidebar}>
                       <MdOutlineCancel/>
                     </button>
                 </TooltipComponent>
