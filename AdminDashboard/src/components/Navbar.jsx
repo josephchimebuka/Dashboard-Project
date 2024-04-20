@@ -13,9 +13,9 @@ import UserProfile from "./UserProfile"
 import ChartsHeading from "./Charts/ChartsHeading"
 
 
-const NavButton =({title, icon, customFunc, color, dotColor})=>(
+const NavButton =({title, icon, customfunc, color, dotColor})=>(
   <TooltipComponent content={title} position="BottomCenter">
-    <button type="button" style={{color}} className="relative text-xl rounded-full hover:bg-light-gray" onClick={customFunc}>
+    <button type="button" style={{color}} className="relative text-xl rounded-full hover:bg-light-gray" onClick={customfunc}>
       <span style={{background: dotColor}} className="absolute inline-flex rounded-full h-2 w-2 -right-1 top-0"/>
       {icon}
    
@@ -49,7 +49,7 @@ const Navbar = () => {
        title={"Menu"}
         color={"blue"}
          dotColor={""}
-         customFunc={()=>setActiveMenu((prev)=>(!prev))}
+         customfunc={()=>setActiveMenu((prev)=>(!prev))}
 
           icon={<AiOutlineMenu/>}
            />
@@ -59,7 +59,7 @@ const Navbar = () => {
         color={"blue"}
          dotColor={""}
           icon={<FiShoppingCart/>}
-          customFunc={()=> handleClick('cart')}
+          customfunc={()=> handleClick('cart')}
            />
 
     <NavButton
@@ -67,7 +67,7 @@ const Navbar = () => {
         color={"blue"}
          dotColor={"#03C9D7"}
           icon={<BsChatLeft/>}
-          customFunc={()=> handleClick('chat')}
+          customfunc={()=> handleClick('chat')}
            />
 
 
@@ -76,12 +76,12 @@ const Navbar = () => {
         color={"blue"}
           dotColor={"#03C9D7"}
           icon={<RiNotification3Fill/>}
-          customFunc={()=> handleClick('notification')}
+          customfunc={()=> handleClick('notification')}
            />
 
 
           <TooltipComponent content='Profile' position="BottomCenter">
-          <div className="flex items-center cursor-pointer p-3 hover:bg:light-gray rounded-lg"   customFunc={()=> handleClick('chat')}>
+          <div className="flex items-center cursor-pointer p-3 hover:bg:light-gray rounded-lg"   customfunc={()=> handleClick('chat')}>
               <img src={avatar} className="rounded-full w-8 h-8"/>
               <p>
                 <span className="text-gray-400 text-14">Hi,</span> {'  '}
